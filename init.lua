@@ -90,8 +90,12 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.expandtab = true
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -102,7 +106,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -171,6 +175,9 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- baris exit on jj and jk
+vim.keymap.set('i', 'jj', '<ESC>')
+vim.keymap.set('i', 'jk', '<ESC>')
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -241,6 +248,20 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
+  {
+    'fatih/vim-go', -- baris go lang support
+    config = function()
+      vim.g['go_gopls_enabled'] = 0
+      vim.g['go_code_completion_enabled'] = 0
+      vim.g['go_fmt_autosave'] = 0
+      vim.g['go_imports_autosave'] = 0
+      vim.g['go_mod_fmt_autosave'] = 0
+      vim.g['go_doc_keywordprg_enabled'] = 0
+      vim.g['go_def_mapping_enabled'] = 0
+      vim.g['go_textobj_enabled'] = 0
+      vim.g['go_list_type'] = 'quickfix'
+    end,
+  },
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -887,6 +908,13 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+<<<<<<< Updated upstream
+=======
+
+      -- You can configure highlights by doing something like:
+      vim.cmd.hi 'Comment gui=none'
+      vim.cmd.language 'en_US'
+>>>>>>> Stashed changes
     end,
   },
 
@@ -966,12 +994,15 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-
+  -- baris to learn vim motions
+  {
+    'ThePrimeagen/vim-be-good',
+  },
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
